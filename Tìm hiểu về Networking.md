@@ -21,3 +21,5 @@ Tóm tắt ngắn gọn mô hình OSI gồm 7 tầng:
 + Tầng Data link: thực hiện các liên kết kiểm soát lỗi và lưu lượng sử dụng địa MAC
 + Tầng Physical: truyền tín hiệu điện sóng radio hoặc Wifi ethernet, bluetooth 
 
+Demo1
+
