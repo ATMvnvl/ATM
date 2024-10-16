@@ -33,5 +33,3 @@ Tóm tắt ngắn gọn mô hình OSI gồm 7 tầng:
 
 
  #### Mô hình TCP/IP
-
-202020
