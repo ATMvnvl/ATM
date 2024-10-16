@@ -21,5 +21,17 @@ Tóm tắt ngắn gọn mô hình OSI gồm 7 tầng:
 + Tầng Data link: thực hiện các liên kết kiểm soát lỗi và lưu lượng sử dụng địa MAC
 + Tầng Physical: truyền tín hiệu điện sóng radio hoặc Wifi ethernet, bluetooth 
 
-Demo1
 
+ #### Mô hình TCP/IP
+
+ Tóm tắt ngắn gọn mô hình TCP/IP gồm 4 tầng:
+ 
++ Tầng Application: cung cấp cho các ứng dụng những trao đổi dữ liệu chuẩn hóa, giao tiếp dữ liệu giữa 2 máy khác nhau thông qua các dịch vụ mạng khác nhau
++ Tầng Transport: đảm bảo duy trì thông tin liên lạc từ đầu đến cuối trên toàn mạng là trách nhiệm của TCP. Giao thức này xử lý việc liên lạc giữa các máy chủ và cung cấp các tính năng kiểm soát luồng, ghép kênh và đảm bảo độ tin cậy
++ Tầng Internet: nhiệm vụ xử lý các gói tin mạng và kết nối các mạng độc lập, giúp vận chuyển các gói tin qua mạng
++ Tầng Physical: bao gồm các giao thức hoạt động trên một liên kết duy nhất – thành phần mạng kết nối các nút hoặc máy chủ trong mạng, chịu trách nhiệm truyền dữ liệu giữa hai thiết bị trong cùng một mạng
+
+
+ #### Mô hình TCP/IP
+
+202020
