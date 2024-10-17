@@ -344,3 +344,13 @@ Kết quả:
 - Cuộc kiểm tra diễn ra trong khoảng thời gian 10.6098 giây. Tổng lượng dữ liệu truyền là 16.9 MB. Băng thông trung bình là 13.3 Mbits/sec.
 
 
+#### 7. tcpdump 
+Công cụ bắt và phân tích gói tin trên mạng qua dòng lệnh. Nó cho phép xem chi tiết nội dung của các gói tin qua mạng. Gỡ lỗi kết nối, phân tích luồng mạng, hoặc kiểm tra lưu lượng dữ liệu.
+
+Cú pháp:
+
+`tcpdump -i eth0 `
+- i: Tên card mạng (có thể dùng lệnh ip a kiểm tra)
+
+![alt text](tcpdump.png)
+

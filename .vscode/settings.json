@@ -1,0 +1,5 @@
+{
+    "docker.contexts.showInStatusBar": true,
+    "editor.suggest.showStatusBar": true,
+    "problems.showCurrentInStatus": true
+}
