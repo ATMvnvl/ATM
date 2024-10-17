@@ -40,6 +40,8 @@ Tóm tắt ngắn gọn mô hình OSI gồm 7 tầng:
  + Chia quá trình giao tiếp mạng thành nhiều tầng (layer) riêng biệt
  + Cung cấp khuôn khổ để tạo và triển khai các tiêu chuẩn và thiết bị mạng
  
+ Khác:
+ 
 | Khác | TCP/IP | OSI |
 | --- |--- | --- |  
 | Số lớp | 4 lớp | 7 lớp 
