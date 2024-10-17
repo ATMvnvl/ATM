@@ -41,8 +41,8 @@ Tóm tắt ngắn gọn mô hình OSI gồm 7 tầng:
  + Cung cấp khuôn khổ để tạo và triển khai các tiêu chuẩn và thiết bị mạng
  
  Khác:
- 
-| Khác | TCP/IP | OSI |
+
+| Phân loại | TCP/IP | OSI |
 | --- |--- | --- |  
 | Số lớp | 4 lớp | 7 lớp 
 | Phổ biến | Nhiều sử dụng | Ít được sử dụng 
