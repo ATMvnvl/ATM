@@ -1,5 +1,5 @@
 ## Tìm hiểu về Networking
-### I. Mô hình OSI && TCP/IP
+### I.Mô hình OSI, Giao thức TCP, HTTP, SSL
 
 Mô tả các tầng OSI và TCP/IP
 
@@ -42,7 +42,7 @@ Sau khi kết nối được thiết lập, TCP hoạt động bằng cách chia
 + Tầng Physical: Bao gồm các giao thức hoạt động trên một liên kết duy nhất – thành phần mạng kết nối các nút hoặc máy chủ trong mạng, chịu trách nhiệm truyền dữ liệu giữa hai thiết bị trong cùng một mạng
 
 
- #### 3. So sánh mô hình OSI và TCP/IP
+ #### So sánh mô hình OSI và TCP/IP
 
  Giống:
  + Đều là mô hình logic để chuẩn hóa truyền thông mạng
@@ -62,7 +62,7 @@ Sau khi kết nối được thiết lập, TCP hoạt động bằng cách chia
 | Sự phát triển | Phát triển giao thức trước - xây dựng mô hình sau | Xây dựng mô hình trước - giao thức dựng sau
 
 
- #### 4. Giao thức HTTP 
+ #### 3. Giao thức HTTP 
 
  Giao thức HTTP (Hypertext Transfer Protocol) được sử dụng rộng rãi trong việc truyền tải dữ liệu qua World Wide Web. HTTP cho phép trình duyệt của người dùng gửi yêu cầu đến máy chủ để truy cập nội dung trang web, từ đó tải về và hiển thị thông tin. 
 
@@ -89,26 +89,97 @@ HTTP là một giao thức mạnh mẽ nhờ vào khả năng xử lý linh ho�
 
 ![alt text](<http 2-1.png>)
 
-#### 4.1 Yêu cầu (Request)
+#### 3.1 Yêu cầu (Request)
 Khi máy khách (client) gửi yêu cầu đến máy chủ (server) qua HTTP, yêu cầu này bao gồm:
 + Phương thức yêu cầu: Các phương thức như GET (yêu cầu thông tin), POST (gửi dữ liệu), PUT (cập nhật dữ liệu), DELETE (xóa tài nguyên).
 + URL tài nguyên: Địa chỉ của tài nguyên trên máy chủ.
 + Dữ liệu biểu mẫu: Dữ liệu kèm theo trong các yêu cầu POST, PUT.
 + Tiêu đề yêu cầu: Thông tin bổ sung như ngôn ngữ, định dạng dữ liệu mong muốn.
 
-#### 4.2 Xử lý yêu cầu (Request Processing)
+#### 3.2 Xử lý yêu cầu (Request Processing)
 Sau khi nhận được yêu cầu từ client, máy chủ xử lý nó bằng cách:
 + Kiểm tra tính hợp lệ: Xem xét cú pháp và quyền truy cập.
 + Truy xuất dữ liệu: Truy cập cơ sở dữ liệu hoặc các nguồn khác nếu cần.
 + Thực hiện logic ứng dụng: Máy chủ xử lý các thao tác yêu cầu như truy vấn, đăng nhập, hoặc lưu trữ thông tin.
 
-#### 4.3 Phản hồi (Response)
+#### 3.3 Phản hồi (Response)
 Sau khi xử lý, máy chủ gửi phản hồi lại client. Phản hồi này bao gồm:
 + Mã trạng thái: Thông báo kết quả của yêu cầu như 200 (OK), 404 (Not Found), 500 (Internal Server Error).
 + Dữ liệu phản hồi: Nội dung trang web hoặc thông tin liên quan mà client yêu cầu.
 
-#### 4.4 Xử lý phản hồi (Response Processing)
+#### 3.4 Xử lý phản hồi (Response Processing)
 Client nhận phản hồi từ máy chủ và xử lý nó bằng cách:
 + Kiểm tra phản hồi: Xem xét mã trạng thái để xác định kết quả yêu cầu.
 + Hiển thị nội dung: Nếu thành công, nội dung sẽ được hiển thị qua trình duyệt.
 + Sử dụng dữ liệu: Client có thể dùng dữ liệu cho các mục đích khác, như cập nhật giao diện hoặc lưu trữ thông tin.
+
+
+ #### 4. Giao thức SSL 
+SSL được viết tắt từ Secure Sockets Layer, đây là một tiêu chuẩn của công nghệ bảo mật, truyền thông mã hóa giữa trình duyệt và máy chủ web server. SSL hoạt động và đảm bảo rằng những dữ liệu được truyền tải giữa máy chủ và trình duyệt của bạn đều được toàn vẹn, riêng tư và bảo mật. Hiện nay, SSL được xem là tiêu chuẩn bảo mật cho đa số website trên thế giới, giúp dữ liệu truyền đi trên Internet được bảo vệ một cách an toàn.
+
+#### 4.1 Cách hoạt động SSL
+HTTPS sử dụng giao thức SSL (Secure Sockets Layer) hoặc giao thức tiếp nối tầng bảo mật TLS để bảo mật thông tin liên lạc bằng cách truyền dữ liệu qua mạng Internet được mã hóa. SSL hoạt động dựa trên hai khái niệm chính: mã hóa bất đối xứng (asymmetric cryptography) và mã hóa đối xứng (symmetric cryptography).
+
+Khi người dùng truy cập vào một dịch vụ hỗ trợ SSL, như một trang web, quá trình kết nối diễn ra như sau:
+
++ Ứng dụng của người dùng yêu cầu khóa công khai từ máy chủ để trao đổi với khóa công khai của chính nó.
++ Việc trao đổi khóa công khai này cho phép cả hai bên có thể mã hóa các tin nhắn mà chỉ bên đích mới có thể giải mã được.
++ Khi người dùng gửi tin nhắn đến máy chủ, ứng dụng sử dụng khóa công khai của máy chủ để mã hóa tin nhắn.
++ Máy chủ nhận tin nhắn từ người dùng và giải mã nó bằng khóa riêng của mình. Sau đó, tin nhắn được mã hóa và gửi trở lại trình duyệt của người dùng bằng cách sử dụng khóa công khai do ứng dụng của người dùng tạo ra.
+
+![alt text](ssl.jpeg)
+
+Qua quá trình này, thông tin truyền tải giữa người dùng và máy chủ được bảo mật bằng cách sử dụng mã hóa và khóa công khai/ riêng tư để đảm bảo chỉ những người có khóa riêng mới có thể giải mã và đọc được tin nhắn.
+
+#### 4.2 Các thành phần SSL
+
+Các thành phần chung của chứng chỉ SSL như sau:
++ CSR (Certificate Signing Request): là một tài liệu văn bản chứa thông tin về chủ sở hữu tên miền đã được mã hóa. Thông tin này được gửi đến nhà cung cấp dịch vụ SSL để xác minh và xác nhận.
+
++ CRT (Certificate): Là thành phần được trả về sau khi CSR đã được xác nhận và chứa thông tin chứng chỉ SSL. Nếu CSR được tạo ra để nhà cung cấp SSL xác nhận tính tin cậy của website với thông tin đã được mã hóa trong nó, thì CRT là một tài liệu để trình duyệt web tin tưởng vào.
+
++ Private key: Là một file mã hóa được tạo ra cùng với CSR. Để giải thích một cách đơn giản, hãy tưởng tượng rằng CRT là một phần mã hóa công khai mà trình duyệt web sử dụng để truy cập vào website của bạn. Khi dữ liệu đến đến website, nó cần một chìa khóa riêng để mở khóa thông tin đã được mã hóa trong CRT.
+
++ CA (Certificate Authority hoặc Certification Authority): Là một tổ chức hoặc cơ quan cung cấp thông tin về chứng chỉ SSL.
+
+![alt text](ssl_vina.png)
+
+#### 4.3 Vai trò SSl
+
++ Bảo mật thông tin bằng mã hóa
+
+SSL giúp cho thông tin nhạy cảm trở nên an toàn khi chúng ta gửi qua Internet. SSL hoạt động bằng cách biến thông tin thành một loại “ngôn ngữ” chỉ có những người có chìa khóa mới có thể hiểu được. Khi bạn gửi thông tin trên Internet, thông tin đó di chuyển qua nhiều máy tính trước khi đến máy chủ đích. Nếu thông tin này không được bảo vệ bằng chứng chỉ SSL, bất kỳ máy tính nào ở giữa đường truyền đều có thể xem được. Điều này có nghĩa là thông tin như số thẻ tín dụng, tên đăng nhập và mật khẩu, cũng như các thông tin quan trọng khác có thể bị lộ ra ngoài. 
+
++ Cung cấp tính xác thực
+
+Ngoài việc bảo mặt bằng cách biến thông tin thành ngôn ngữ bí mật, chứng nhận SSL còn đảm bảo rằng bạn đang gửi thông tin đến máy chủ đúng đích, chứ không phải tới một kẻ giả mạo đang cố gắng lừa đảo hoặc đánh cắp thông tin. Những nhà cung cấp SSL đáng tin cậy sẽ đặt điều kiện cho các công ty phải xác minh danh tính của họ trước khi nhận chứng chỉ SSL.
+
++ Tăng uy tín website
+
+Khi bạn truy cập một trang web an toàn, trình duyệt web thường sẽ hiển thị cho bạn những biểu tượng khóa hoặc một thành màu xanh lá cây để cho biết kết nối đang được bảo mật. Những dấu hiệu này giúp người dùng cảm thấy an tâm hơn và tin tưởng trang web.
+
++ Tăng độ tin tưởng của người truy cập
+
+HTTPS cũng giúp ngăn chặn các cuộc tấn công lừa đảo và các email gửi từ tội phạm giả mạo trang web của bạn. Trong các email này, thường sẽ có một liên kết dẫn bạn đến trang web của tội phạm hoặc họ có thể sử dụng chiêu thức “Man-in-the-middle” (tên tội phạm sẽ lừa người dùng gửi thông tin nhạy cảm trực tiếp cho họ) trên tên miền của trang web giả mạo. 
+
++ Bảo mật thanh toán (PCI Compliance)
+
+Để cho phép người dùng nhập thông tin thẻ tín dụng trên trang web, bạn phải qua một loạt các kiểm tra để chứng minh rằng bạn tuân thủ các tiêu chuẩn an toàn khi thanh toán bằng thẻ, gọi là Payment Card Industry (PCI). Để đủ tiêu chuẩn, đương nhiên bạn cần sử dụng chứng chỉ SSL. Khi đó, các thông tin thẻ tín dụng của người dùng sẽ được bảo mật và an toàn khi họ thực hiện giao dịch trực tuyến.
+
++ Tối ưu SEO
+
+Google đã thông báo rằng việc sử dụng HTTPS sẽ ảnh hưởng đến việc xếp hạng trang web. Khi hiển thị kết quả tìm kiếm, các trang web có SSL sẽ được đặt ưu tiên hơn so với các trang web tương tự nhưng không có SSL. Điều này giúp cải thiện tính bảo mật và độ tin cậy của trang web, đồng thời tạo điều kiện tốt hơn cho người dùng khi tìm kiếm thông tin trực tuyến.
+
+#### 4.4 Nhược điểm SSl
+
++ Tăng tải cho máy chủ: Mã hóa và giải mã dữ liệu trong quá trình truyền thông qua SSL có thể tốn thêm tài nguyên máy chủ, gây ra một chút tăng tải và làm chậm quá trình truyền dữ liệu.
+
++ Chi phí: Một số chứng chỉ SSL có giá cao, đặc biệt là các chứng chỉ mở rộng như EV SSL. Điều này có thể tạo ra một chi phí đáng kể đối với các tổ chức nhỏ hoặc cá nhân muốn bảo mật trang web của mình.
+
++ Đòi hỏi quá trình xác thực: Việc xác thực chứng chỉ SSL có thể đòi hỏi một số thủ tục phức tạp và mất thời gian, đặc biệt là đối với các loại chứng chỉ cao cấp như EV SSL.
+
++ Khả năng tấn công trung gian: Một số hình thức tấn công trung gian như tấn công Man-in-the-Middle (MITM) có thể xảy ra trong quá trình thiết lập kết nối SSL nếu không được triển khai đúng cách. Điều này có thể đe dọa tính bảo mật của dữ liệu truyền qua SSL.
+
++ Hạn chế của chứng chỉ tự ký: Chứng chỉ tự ký (self-signed) không được phê duyệt bởi một cơ quan xác thực đáng tin cậy, do đó, trình duyệt web sẽ cảnh báo người dùng về tính bảo mật không đáng tin cậy của chứng chỉ này.
+
+
