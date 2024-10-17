@@ -1,5 +1,5 @@
 ## Tìm hiểu về Networking
-### I.Mô hình OSI, Giao thức TCP, HTTP, SSL
+### I. Mô hình OSI, Giao thức TCP, HTTP, SSL
 
 Mô tả các tầng OSI và TCP/IP
 
@@ -181,5 +181,44 @@ Google đã thông báo rằng việc sử dụng HTTPS sẽ ảnh hưởng đ�
 + Khả năng tấn công trung gian: Một số hình thức tấn công trung gian như tấn công Man-in-the-Middle (MITM) có thể xảy ra trong quá trình thiết lập kết nối SSL nếu không được triển khai đúng cách. Điều này có thể đe dọa tính bảo mật của dữ liệu truyền qua SSL.
 
 + Hạn chế của chứng chỉ tự ký: Chứng chỉ tự ký (self-signed) không được phê duyệt bởi một cơ quan xác thực đáng tin cậy, do đó, trình duyệt web sẽ cảnh báo người dùng về tính bảo mật không đáng tin cậy của chứng chỉ này.
+
+
+### II. Các lớp IP không gian Private IP Address
+
+#### 1. Các lớp IP
+
+Bảng phân tích cấu tạo của địa chỉ IP
+
+| Các lớp địa chỉ IP | Mô tả |
+|---- | ---- | 
+| `Lớp A` | Bao gồm các địa chỉ IP có giá trị oc-tet đầu tiên nằm trong khoảng từ 1 đến 126 và dải địa chỉ trải dài từ 128.1.0.0 đến 191.254.0.0. Phân bổ chủ yếu cho các tổ chức lớn trên toàn cầu. 
+| `Lớp B` | Bao gồm các địa chỉ IP có giá trị oc-tet đầu tiên nằm trong khoảng từ 128 đến 191. và dải địa chỉ trải dài từ 128.1.0.0 đến 191.254.0.0. Phân bổ chủ yếu cho các tổ chức tầm trung trên toàn cầu.
+| `Lớp C` | Bao gồm các địa chỉ IP có giá trị oc-tet đầu tiên nằm trong khoảng từ 192 đến 223 và dải địa chỉ trải dài từ 192.0.1.0 đến 223.255.254.0 Phân bổ chủ yếu cho các tổ chức nhỏ trên toàn cầu. 
+| `Lóp D` | Bao gồm các địa chỉ IP có giá trị oc-tet đầu tiên trong khoảng từ 224 đến 239, với 4 bit đầu tiên cố định là 1110 và dải địa chỉ trải dài từ 224.0.0.0 đến 239.255.255.255. Dành riêng cho multicast hoặc broadcast.
+| `Lớp E` |  Bao gồm các địa chỉ IP có giá trị oc-tet đầu tiên nằm trong khoảng từ 240 đến 255 và sải địa chỉ trải dài từ 240.0.0.0 đến 254.255.255.255. Chỉ dành cho việc nghiên cứu.
+
+Trong thực tế, các địa chỉ IP lớp A B C được sử dụng phổ biến để thiết lập cho các thiết bị trong mạng. Địa chỉ lớp D thường dành riêng cho các ứng dụng truyền thông đa phương tiện. Còn địa chỉ lớp E vẫn đang được thử nghiệm và dự trữ cho các mục đích phát triển trong tương lai.
+
+Ngoài ra, còn có một lớp đặc biệt gọi là Loopback, được đại diện bởi địa chỉ 127.x.x.x. Lớp này được sử dụng để kiểm tra vòng lặp quy hồi (loopback) và chỉ được sử dụng trong nội bộ của thiết bị.
+
+
+
+#### 1.2 Các phiên bản IP
+Địa chỉ IP bao gồm 2 phiên bản là IPv4 và IPv6:
+
++ IPv4 (Internet Protocol version 4) là một phiên bản của giao thức Internet Protocol (IP), được thiết kế để xác định và gửi dữ liệu giữa các thiết bị trên Internet. IPv4 là phiên bản chính thức đầu tiên của IP và là nền tảng cơ bản cho việc kết nối mạng trên toàn cầu.
+
++ IPv6 (Internet Protocol version 6) là một phiên bản của giao thức Internet Protocol (IP), được thiết kế để thay thế và mở rộng IPv4 (Internet Protocol version 4), phiên bản IP trước đó. IPv6 được phát triển để giải quyết vấn đề cạn kiệt địa chỉ IP duy nhất của IPv4 do sự mở rộng nhanh chóng của Internet và sự gia tăng số lượng thiết bị kết nối.
+
+#### 1.3 Phân loại IP
+
+Bảng phân loại IP
+
+| Phân loại IP | Mô tả |
+| ---------- | --------- | 
+| `IP Public` | IP public, còn được gọi là IP công cộng, là địa chỉ mạng được cung cấp bởi nhà cung cấp dịch vụ internet. Đây là địa chỉ mà các mạng gia đình hoặc doanh nghiệp sử dụng để kết nối với các thiết bị khác trên internet. IP public cho phép các thiết bị trong mạng truy cập vào web và giao tiếp trực tiếp với các máy tính khác.
+| `IP PRIVATE` | IP private, hay còn được gọi là IP riêng, được sử dụng trong mạng LAN nội bộ. Khác với public IP, private IP không thể kết nối với mạng Internet. Chỉ có các thiết bị máy tính, máy in,… trong mạng cục bộ mới có thể giao tiếp với nhau thông qua router. IP private có thể được cấp tự động bởi bộ định tuyến hoặc được thiết lập thủ công
+| `IP Static` | IP static (hay địa chỉ IP tĩnh), là cách đặt IP thủ công cho từng thiết bị một và không thay đổi theo thời gian. Điều này đảm bảo rằng địa chỉ IP của thiết bị sẽ không thay đổi và luôn được nhận dạng cố định trên mạng.
+| `IP Dynamic ` | IP dynamic (hay địa chỉ IP động) là IP có thể thay đổi từ một địa chỉ này sang địa chỉ khác. Quá trình thay đổi này hoàn toàn tự động và được quản lý bởi máy chủ DHCP (Dynamic Host Configuration Protocol). Điều này cho phép tối ưu việc quản lý và phân phối IP trong mạng.
 
 
