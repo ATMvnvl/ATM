@@ -251,6 +251,36 @@ Trong đó:
   + mdev: Độ lệch chuẩn của thời gian phản hồi là 0.042 mili giây
 
 
+#### 2. Telnet 
+Công cụ dùng để kiểm tra kết nối TCP đến một máy chủ cụ thể trên một cổng nào đó. Được sử dụng để kết nối tới các dịch vụ dựa trên TCP, chẳng hạn như HTTP, FTP, SMTP, hoặc kiểm tra xem một cổng có mở hay không.
+
+Cú pháp: `telnet <dia_chi_ip>  23`
+
+
+#### 3. Traceroute
+Công cụ cho phép theo dõi hành trình của một gói tin từ thiết bị nguồn đến đích qua mạng, và xem các router trung gian mà gói tin đã đi qua. Chẩn đoán sự cố kết nối, phát hiện điểm tắc nghẽn hoặc các router bị hỏng trên đường đi.
+
+Cú pháp:
++ Trên `Windows`: tracert vinahost.vn 
++ Trên `Kali`: traceroute vinahost.vn
+
+![alt text](traceroute.png)
+
+Trong đó: 
+
+- `traceroute to vinahost.vn (123.30.136.228), 30 hops max, 60 byte packets`
+  - traceroute to vinahost.vn: Đây là lệnh được sử dụng để theo dõi đường đi đến vinahost.vn
+  - (123.30.136.228): Đây là địa chỉ IP của máy chủ VinaHost
+  - 30 hops max: Đây là số lần nhảy tối đa mà gói tin có thể thực hiện trước khi bị loại bỏ
+  - 60 byte packets: Kích thước của các gói tin được sử dụng trong quá trình traceroute là 60 byte
+- `1  103.9.77.1 (103.9.77.1)  2.780 ms  2.538 ms  2.376 ms`
+  - 1: Đây là lần nhảy đầu tiên. Gói tin đã đến một máy chủ có địa chỉ IP 103.9.77.1
+  - 103.9.77.1 (103.9.77.1): Tên miền (nếu có) và địa chỉ IP của máy chủ
+  - 2.780 ms 2.538 ms 2.376 ms: Thời gian (tính bằng mili giây) cần thiết để gói tin đến đích ở lần nhảy này. Ba số đại diện cho ba lần gửi thử của gói tin, cho thấy độ trễ dao động nhẹ
+- `2  kingcorp.net (123.30.136.228)  0.337 ms  0.250 ms  0.314 ms`
+  - 2: Đây là lần nhảy thứ hai ( đích đến). Gói tin đã đến máy chủ đích kingcorp.net, có địa chỉ IP 123.30.136.228. Đây cũng là địa chỉ IP của VinaHost mà bạn đang ping
+  - kingcorp.net (123.30.136.228): Tên miền và địa chỉ IP của máy chủ đích
+  - 0.337 ms 0.250 ms 0.314 ms: Thời gian phản hồi của gói tin ở lần nhảy này rất thấp, chỉ nằm trong khoảng từ 0.250 ms đến 0.337 ms. Điều này cho thấy kết nối đến máy chủ VinaHost là rất nhanh.
 
 
 
