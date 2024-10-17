@@ -283,4 +283,64 @@ Trong đó:
   - 0.337 ms 0.250 ms 0.314 ms: Thời gian phản hồi của gói tin ở lần nhảy này rất thấp, chỉ nằm trong khoảng từ 0.250 ms đến 0.337 ms. Điều này cho thấy kết nối đến máy chủ VinaHost là rất nhanh.
 
 
+#### 4. mtr 
+Một công cụ kết hợp cả ping và traceroute, hiển thị theo thời gian thực hành trình của các gói tin qua mạng và tính toán thông số hiệu suất như độ trễ, mất gói. Giám sát và phân tích hiệu suất mạng theo thời gian thực
+
+![alt text](mtr.png)
+
+Trong đó:
+- `Start: 2024-10-17T07:49:56+0000`: Thời điểm bắt đầu thực hiện lệnh mtr.
+HOST: 47263.vpsvinahost.vn: Tên máy chủ của bạn (có thể là tên miền hoặc địa chỉ IP).
+
+
+Các cột trong bảng:
+
+- `HOST`: Địa chỉ IP của mỗi lần nhảy (hop) trên đường đi đến đích.
+- `Loss%`: Tỷ lệ phần trăm gói tin bị mất tại mỗi lần nhảy. Trong trường hợp này, tất cả các gói tin đều đến đích (0% mất mát).
+- `Snt`: Tổng số gói tin được gửi đến mỗi lần nhảy (thường là 10).
+- `Last`: Thời gian phản hồi (RTT) của gói tin cuối cùng được gửi đến mỗi lần nhảy (tính bằng mili giây).
+- `Avg`: Thời gian phản hồi trung bình của tất cả các gói tin được gửi đến mỗi lần nhảy.
+- `Best`: Thời gian phản hồi nhanh nhất của một gói tin đến mỗi lần nhảy.
+- `Wrst`: Thời gian phản hồi chậm nhất của một gói tin đến mỗi lần nhảy.
+- `StDev`: Độ lệch chuẩn của thời gian phản hồi, cho biết mức độ dao động của các lần đo.
+
+
+#### 5. iftop
+Công cụ giám sát lưu lượng mạng theo thời gian thực, hiển thị băng thông sử dụng của từng kết nối mạng. Giám sát lưu lượng mạng, giúp phát hiện các nguồn sử dụng nhiều băng thông hoặc các vấn đề mạng. Iftop sẽ hiển thị danh sách các tiến trình sử dụng băng thông mạng được cập nhật theo thời gian thực trung bình cứ sau 2, 10 và 40 giây.
+
+![alt text](iftop.png)
+
+
+#### 6. iperf 
+Công cụ đo băng thông mạng giữa hai thiết bị, sử dụng TCP hoặc UDP. Đo tốc độ truyền dữ liệu và hiệu suất của kết nối mạng.
+
+Cú pháp:
+
+Trên server: `iperf -sp 2024` 
+- s: thiết lập server 
+- p: lắng nghe cổng kết nối là 2024
+
+Trên client: `iperf -c 103.9.77.103 -p 2024` 
+- c: chế độ client
+- 103.9.77.103: Ip server 
+- p: cổng 2024
+
+![alt text](iperf.png)
+
+Trong đó:
+- `Server listening on TCP port 2024`: Máy chủ đang lắng nghe trên cổng TCP 2024, chờ nhận kết nối từ máy khách.
+- `TCP window size: 128 KByte (default)`: Kích thước cửa sổ TCP mặc định là 128 KB.
+- `[ 1] local 103.9.77.103 port 2024 connected with 118.69.233.92 port 26682:`
+  - `[ 1]`: Đây là luồng kết nối đầu tiên (có thể có nhiều luồng nếu nhiều máy khách kết nối cùng lúc).
+  - `local 103.9.77.103 port 2024`: Địa chỉ IP và cổng của máy chủ.
+  - `connected with 118.69.233.92 port 26682:` Địa chỉ IP và cổng của máy khách đã kết nối.
+- `[ ID] Interval Transfer Bandwidth`: Các cột này hiển thị thông tin về kết nối:
+  - `ID`: Số thứ tự của luồng kết nối
+  - `Interval`: Khoảng thời gian của cuộc kiểm tra (từ đầu đến cuối)
+  - `Transfer`: Tổng lượng dữ liệu đã truyền trong khoảng thời gian đó
+  - `Bandwidth`: Băng thông trung bình trong khoảng thời gian đó
+
+Kết quả:
+- Cuộc kiểm tra diễn ra trong khoảng thời gian 10.6098 giây. Tổng lượng dữ liệu truyền là 16.9 MB. Băng thông trung bình là 13.3 Mbits/sec.
+
 
