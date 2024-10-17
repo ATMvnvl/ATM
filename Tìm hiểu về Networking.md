@@ -222,3 +222,35 @@ Bảng phân loại IP
 | `IP Dynamic ` | IP dynamic (hay địa chỉ IP động) là IP có thể thay đổi từ một địa chỉ này sang địa chỉ khác. Quá trình thay đổi này hoàn toàn tự động và được quản lý bởi máy chủ DHCP (Dynamic Host Configuration Protocol). Điều này cho phép tối ưu việc quản lý và phân phối IP trong mạng.
 
 
+### III. Ý nghĩa của các công cụ 
+
+#### 1. Ping 
+Công cụ kiểm tra kết nối mạng giữa hai thiết bị, dựa trên giao thức ICMP. Nó gửi gói tin ICMP Echo Request và nhận phản hồi ICMP Echo Reply. Kiểm tra xem một thiết bị từ xa có sẵn và có thể truy cập qua mạng hay không, và đo độ trễ (latency).
+
+![alt text](ping.png)
+
+Trong đó:
++ `PING vinahost.vn (123.30.136.228) 56(84) bytes of data` Dòng này cho biết bạn đang ping đến vinahost.vn, có địa chỉ IP là 123.30.136.228. Thông tin 56(84) bytes cho biết kích thước của gói tin được gửi đi (56 byte) và kích thước của toàn bộ dữ liệu được gửi đi (bao gồm cả header, 84 byte)
++ `64 bytes from kingcorp.net (123.30.136.228) icmp_seq=1 ttl=63 time=0.325 ms` Dòng này hiển thị kết quả của gói tin đầu tiên được gửi đi.
+  + 64 bytes from kingcorp.net: Cho biết gói tin đã được nhận lại, có kích thước 64 byte và đến từ kingcorp.net
+`Lưu ý` rằng kingcorp.net có thể là tên miền của máy chủ VinaHost mà bạn đang ping, hoặc là một máy chủ trung gian trên đường đi
+  + icmp_seq=1: Số thứ tự của gói tin (gói tin đầu tiên)
+  + ttl=128: Thời gian sống (Time To Live) của gói tin còn lại 128 lần nhảy (hop) giữa các router trước khi bị loại bỏ
+  + time=6.26 ms: Thời gian tính bằng mili giây để gói tin đi và về (round-trip time - RTT). Các dòng tiếp theo giải thích tương tự 
++ `--- vinahost.vn ping statistics ---`  Dòng này bắt đầu phần tóm tắt thống kê của quá trình ping.
++ `4 packets transmitted, 4 received, 0% packet loss, time 3004ms -` 
+  + 4 packets transmitted: Tổng số gói tin được gửi đi là 4
+  + 4 received: Tổng số gói tin nhận được phản hồi là 8 (tất cả các gói đều được nhận lại)
+  + 0% packet loss: Tỷ lệ mất gói tin là 0%, nghĩa là không có gói tin nào bị mất trên đường đi
+  + time3004ms: Tổng thời gian thực hiện lệnh ping là 7837 mili giây (khoảng 3.04 giây)
++ `rtt min/avg/max/mdev = 0.325/0.390/0.431/0.042 ms`
+  + rtt: Thời gian phản hồi (round-trip time)
+  + min: Thời gian phản hồi thấp nhất là 0.325 mili giây    
+  + avg: Thời gian phản hồi trung bình là 0.390 mili giây
+  + max: Thời gian phản hồi cao nhất là 0.431 mili giây
+  + mdev: Độ lệch chuẩn của thời gian phản hồi là 0.042 mili giây
+
+
+
+
+
