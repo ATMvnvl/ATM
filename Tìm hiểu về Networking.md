@@ -498,4 +498,89 @@ Trong đó:
   + `tx_errors: 0`: Không có lỗi nào xảy ra khi gửi gói tin
   + `tx_dropped: 0`: Không có gói tin nào bị loại bỏ khi gửi
   + `tx_aborted_errors: 0`: Không có lỗi gói tin bị hủy bỏ khi gửi
-  + `tx_carrier_errors: 0`: Không có lỗi liên quan đến tín hiệu mạng khi gửi gói tin.
+  + `tx_carrier_errors: 0`: Không có lỗi liên quan đến tín hiệu mạng khi gửi gói tin
+  + `tx_heartbeat_errors: 0`: Không có lỗi liên quan đến nhịp tim (heartbeat) của mạng, điều này thường chỉ áp dụng cho mạng Ethernet cũ
+  + `tx_window_errors: 0:` Không có lỗi cửa sổ (window errors), lỗi này thường liên quan đến việc xử lý gói tin quá nhanh so với khả năng của hệ thống
+  + `tx_abort_late_coll: 0`: Không có lỗi do va chạm muộn khi truyền dữ liệu (late collision)
+  + `tx_deferred_ok: 0`: Không có lần truyền nào bị hoãn lại do phải chờ tới lượt
+  + `tx_single_coll_ok và tx_multi_coll_ok: 0`: Không có gói tin nào gặp va chạm đơn lẻ hoặc nhiều va chạm khi gửi. Điều này chỉ thường thấy ở các mạng sử dụng Ethernet cũ
+  + `tx_timeout_count: 0`: Không có lỗi do hết thời gian chờ khi gửi gói tin 
+  + `tx_restart_queue: 0`: Không có sự kiện nào yêu cầu khởi động lại hàng đợi truyền tin
+  + `tx_tcp_seg_good: 141`: Có 141 gói tin TCP được phân mảnh thành công bởi card mạng (TCP segmentation offload)
+  + `tx_tcp_seg_failed: 0`: Không có gói tin TCP nào bị phân mảnh thất bại
+  + `tx_flow_control_xon và tx_flow_control_xoff: 0`: Không có gói tin điều khiển luồng nào được gửi
++ `multicast: 4018`: Số gói tin multicast đã được nhận là 4,018, thông tin này trùng với thống kê ở phần RX.
++ `collisions: 0`: Không có va chạm gói tin trên mạng. Điều này cho thấy mạng đang hoạt động ổn định mà không có xung đột giữa các thiết bị.
++ `alloc_rx_buff_failed: 0`: Không có sự cố nào khi cấp phát bộ đệm để nhận gói tin
++ `tx_smbus và rx_smbus: 0`: Không có gói tin nào liên quan đến giao thức SMBus (System Management Bus) được gửi hoặc nhận
++ `dropped_smbus: 0`: Không có gói tin SMBus nào bị loại bỏ
+
+
+### IV. Phân biệt Bandwidth (Băng thông) và Data Transfer (Truyền tải dữ liệu)
+
+#### 1. Băng thông - Bandwidth
+Băng thông (Bandwidth) là một thuật ngữ trong lĩnh vực mạng và viễn thông, dùng để chỉ lượng dữ liệu có thể được truyền tải qua một kết nối mạng trong một khoảng thời gian nhất định, thường được đo bằng đơn vị bps (bits per second) hoặc Mbps (megabits per second).
+
+Nói cách khác, băng thông biểu thị khả năng của đường truyền trong việc truyền tải dữ liệu, băng thông càng cao thì khả năng truyền tải dữ liệu càng lớn. 
+
+Ví dụ: Nói một cách dễ hiểu, băng thông có thể được ví như kích thước của ống nước – ống càng lớn thì lượng nước chảy qua trong một khoảng thời gian càng nhiều.
+
+#### Phân loại băng thông 
++ `Băng thông nội địa`: Được dùng để tương tác & giao tiếp giữa các server trong cùng một đất nước. Loại band-width này thích hợp cho việc sử dụng trong mạng nội bộ của bạn
++ `Băng thông quốc tế`: Thường được sử dụng để giao tiếp và tương tác giữa các máy chủ ở nhiều quốc gia khác nhau. Khi cáp quốc tế bị đứt, bạn có thể gặp khó khăn trong việc truy cập vào các trang web quốc tế hoặc tốc độ truy cập có thể bị giảm đáng kể
+
+
+#### 2. Truyền tải dữ liệu - Data Transfer 
+Data Transfer (truyền tải dữ liệu) là một khái niệm rất quan trọng trong kỹ thuật máy tính và các ngành công nghệ liên quan. Nó được sử dụng để chỉ quá trình truyền tải dữ liệu từ một thiết bị hoặc hệ thống đến một thiết bị hoặc hệ thống khác. Quá trình truyền tải này có thể được thực hiện qua nhiều phương thức khác nhau, bao gồm cáp mạng, sóng vô tuyến và đường truyền qua Internet. 
+
+Các phương pháp truyền tải dữ liệu:
++ `Data Transfer qua cáp mạng`
++ `Data Transfer qua sóng vô tuyến`
++ `Data Transfer qua đường truyền qua Internet`
++ `Data Transfer qua Bluetooth`
++ `Data Transfer qua USB`
+
+#### Phân biệt băng thông và truyền tải dữ liệu
+#### Giống nhau:
++ Yếu tố quan trọng của việc truyền dữ liệu trên mạng
++ Đều ảnh hưởng đến trải nghiệm mạng
++ Đều bị giới hạn bởi nhà cung cấp dịch vụ
++ Ảnh hưởng đến cước phí Internet
+
+#### Khác nhau:
+
+| Phân loại | Bandwidth | Datatransfer 
+| ----- | ----- | -----|
+| `Định nghĩa `| Là tốc độ tối đa mà dữ liệu có thể được truyền qua mạng | Là tổng lượng dữ liệu thực tế được truyền qua mạng trong một khoảng thời gian |
+| `Thời gian và tốc dộ đơn vị đo` | Được tính trong mỗi giây (liên tục). Đo tốc độ truyền tải dữ liệu (số bit truyền đi mỗi giây). Đơn vị thường bps, Mbps, Gbps (bits per second)  | Được tính trong khoảng thời gian dài (tháng, tuần, ngày). Đo tổng lượng dữ liệu được truyền đi trong khoảng thời gian dài. Đơn vị KB, MB, GB, TB (bytes) |
+| `Giới hạn` | Giới hạn tốc độ truyền tải | Giới hạn dung lượng truyền tải | 
+| `Chi phí `| Băng thông cao có thể đắt hơn (tốc độ nhanh hơn, phí cao hơn) | Lượng dữ liệu cao có thể dẫn đến phí phụ trội nếu vượt giới hạn |
+| `Phương pháp tối ưu hóa` | Tăng băng thông để cải thiện tốc độ truyền tải | Giảm lượng dữ liệu tiêu thụ để tránh vượt giới hạn |
+| `Vai trò` | Cung cấp khả năng truyền dữ liệu nhanh chóng và ổn định | Giới hạn tổng lượng dữ liệu được sử dụng mà không gây thêm chi phí |
+| `Ứng dụng`| Ảnh hưởng đến tốc độ tải xuống/tải lên dữ liệu trên mạng |Ảnh hưởng đến lượng dữ liệu bạn có thể sử dụng trong một khoảng thời gian |
+| `Ví dụ sử sử dụng mạng` | Tốc độ truy cập website, xem video mượt mà hay giật lag | Lượng dữ liệu tiêu thụ khi xem video, tải file trong tháng | 
+
+===> `Bandwidth` và `Data Transfer` đều liên quan đến truyền dữ liệu qua mạng và ảnh hưởng trực tiếp đến trải nghiệm của người dùng
+
+### QA: Theo bạn khi truy cập một website `https://vinahost.vn` trên trình duyệt, những điều gì đã xảy ra?
+Phân giải tên miền (DNS resolution) là quá trình chuyển đổi một tên miền (ví dụ: vinahost.vn) thành địa chỉ IP tương ứng (ví dụ: 123.30.136.228). Quá trình này là cần thiết vì các hệ thống mạng, bao gồm Internet, dựa vào các địa chỉ IP để định vị và kết nối các thiết bị với nhau.
+
+`Bước 1`: Phân giải DNS: Tìm địa chỉ IP của máy chủ từ tên miền
+
+`Bước 2`: Kết nối TCP và bắt tay TLS: Thiết lập kết nối an toàn giữa trình duyệt và máy chủ
+
+`Bước 3`: Gửi yêu cầu HTTP trình duyệt gửi yêu cầu lấy tài nguyên từ máy chủ
+
+`Bước 4`: Máy chủ xử lý yêu cầu và gửi lại dữ liệu trang web
+
+`Bước 5`: Trình duyệt tải trang web, phân tích HTML, CSS, và JavaScript
+
+`Bước 6`: Trình duyệt hiển thị trang web để người dùng tương tác
+
+
+ [ATM](https://techmaster.vn/posts/37952/9-bieu-do-tom-tat-ma-lap-trinh-vien-web-nao-cung-nen-biet)
+
+
+ <p style="text-align:center; color:green; font-weight:bold; text-decoration:underline;">
+  Happy hacking, happy life !
+</p>
