@@ -382,3 +382,46 @@ Trong đó:
 + `Các thông tin khác`:
   + SSH traffic: Giao thức SSH được sử dụng trong nhiều gói tin. Các cờ P. xuất hiện nhiều lần, có nghĩa là các dữ liệu đang được đẩy đi qua một phiên SSH đã được thiết lập
   + ACK và SACK: Một số gói tin chứa cờ ACK để xác nhận dữ liệu đã nhận, và có một số gói có SACK (Selective Acknowledgment) chỉ định các đoạn dữ liệu cụ thể được nhận
+
+
+#### 8. ss 
+Công cụ thay thế cho netstat, giúp hiển thị thông tin chi tiết về các kết nối socket (TCP, UDP) trên hệ thống. Theo dõi và quản lý các kết nối mạng hiện có, kiểm tra tình trạng của các socket và dịch vụ đang chạy
+
+Cú pháp: `ss`
+
+![alt text](ss.png)
+
+Trong đó:
++ `Netid (Network ID)`: Giao thức kết nối mạng cục bộ, thường được sử dụng bởi các ứng dụng hệ thống.
+  + `u_str`: Unix Stream Socket
+  + `u_dgr`: Unix Datagram Socket
++ `State`: Trạng thái của kết nối. Các trạng thái thông thường bao gồm:
+  + `ESTAB (Established)`: Kết nối đã được thiết lập và đang hoạt động
++ `Recv-Q (Receive Queue)`: Số lượng byte trong hàng đợi nhận của socket. Nếu số lượng này lớn hơn 0, có thể hệ thống đang gặp vấn đề xử lý dữ liệu đến chậm
++ `Send-Q (Send Queue)`: Số lượng byte trong hàng đợi gửi của socket. Giá trị này lớn hơn 0 có thể cho thấy hệ thống không thể gửi dữ liệu đủ nhanh
++ `Local Address`: Địa chỉ cục bộ và cổng của kết nối
++ `Peer Address`: Địa chỉ và cổng của đối tác từ xa mà hệ thống của bạn kết nối đến. Khi địa chỉ này là *, nó biểu thị rằng đây là một socket cục bộ, không có kết nối từ xa
++ `Process`: Tên và ID của tiến trình liên quan đến kết nối (nếu có)
+  + `/run/systemd/journal/stdout`: Đây là socket được sử dụng bởi systemd, dịch vụ quản lý hệ thống của Linux, để ghi log
+  + `/run/dbus/system_bus_socket`: Socket của DBus, hệ thống liên lạc giữa các tiến trình
+
+
+#### 9. ip route 
+Công cụ này quản lý bảng định tuyến (routing table) của hệ thống. Hiển thị và quản lý bảng định tuyến, thêm, sửa hoặc xóa các tuyến đường trong mạng.
+
+![alt text](ip_route.png)
+
+Cú pháp: `ip route`
+
+Trong đó: 
++ `default via 103.9.77.1 dev eth0 onlink`
+  + `default`: Đây là tuyến đường mặc định (default route), nghĩa là khi hệ thống không tìm thấy tuyến đường cụ thể cho một địa chỉ IP đích, nó sẽ gửi lưu lượng đến tuyến đường này
+  + `via 103.9.77.1`: Địa chỉ của cổng (gateway) mà hệ thống sẽ sử dụng để gửi các gói tin đi. Trong trường hợp này, cổng có địa chỉ IP là 103.9.77.1
+  + `dev eth0`: Chỉ định giao diện mạng eth0 để truyền dữ liệu. Đây là giao diện vật lý hoặc ảo mà gói tin sẽ đi qua
+  + `onlink`: Tùy chọn này cho hệ điều hành biết rằng cổng (103.9.77.1) có thể tiếp cận được trực tiếp từ giao diện này, ngay cả khi hệ thống không tìm thấy cổng đó trong ARP (Address Resolution Protocol). Nó có thể dùng để tạo ra tuyến đường không yêu cầu ARP hoặc các thông tin khác từ router
++ `103.9.77.0/24 dev eth0 proto kernel scope link src 103.9.77.103`
+  + `103.9.77.0/24`: Đây là một tuyến đường con, tức là phạm vi mạng con này bao gồm tất cả các địa chỉ IP từ 103.9.77.0 đến 103.9.77.255 (với mặt nạ mạng /24 nghĩa là 255.255.255.0)
+  + `dev eth0`: Tất cả các gói tin gửi đến mạng con 103.9.77.0/24 sẽ đi qua giao diện mạng eth0
+  + `proto kernel`: Điều này cho biết rằng tuyến đường này đã được thêm bởi hệ điều hành (kernel) khi giao diện eth0 được cấu hình với một địa chỉ IP
+  + `scope link`: Phạm vi của tuyến đường này là "link-local", nghĩa là nó chỉ hợp lệ cho các máy nằm trên cùng một mạng vật lý hoặc cục bộ, tức là không cần phải đi qua cổng (gateway)
+  + `src 103.9.77.103`: Địa chỉ IP nguồn của giao diện eth0. Khi gửi gói tin từ giao diện này, hệ thống sẽ sử dụng địa chỉ IP 103.9.77.103 làm nguồn
