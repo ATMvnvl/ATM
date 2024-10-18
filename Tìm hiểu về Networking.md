@@ -352,5 +352,33 @@ Cú pháp:
 `tcpdump -i eth0 `
 - i: Tên card mạng (có thể dùng lệnh ip a kiểm tra)
 
-![alt text](tcpdump.png)
+![alt text](tcpdump-1.png)
 
+Trong đó: 
++ `listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes`: Đang lắng nghe trên giao diện eth0, và mạng sử dụng loại kết nối Ethernet (EN10MB). Mỗi gói tin bắt được sẽ có độ dài tối đa là 262144 bytes
++ Gói đầu tiên `04:24:55.973037 IP relay-da01.vinahost.vn.ssh > static.vnpt.vn.19186: Flags [P.], seq 4066770897:4066771009, ack 2656807957, win 501, length 112`: 
+  + `04:24:55.973037`: Thời gian gói tin được bắt
+  + `IP`: Gói tin sử dụng giao thức IP
+  + `relay-da01.vinahost.vn.ssh > static.vnpt.vn.19186`: Gói tin này được gửi từ máy chủ relay-da01.vinahost.vn sử dụng giao thức SSH đến máy static.vnpt.vn, trên cổng 19186
+  + ` Flags [P.]`: Cờ PUSH (P) được bật, nghĩa là dữ liệu đang được đẩy tới đích mà không cần đợi thêm dữ liệu khác. Dấu chấm (.) là cờ ACK (Acknowledgment) xác nhận nhận gói tin từ phía đối tác
+  + `seq 4066770897:4066771009`: Đây là dải số sequence number của các byte dữ liệu trong gói tin này, từ 4066770897 đến 4066771009
+  + `ack 2656807957`: Đây là ACK number xác nhận rằng máy gửi đã nhận được tất cả các byte dữ liệu từ phía đối tác với sequence number lên đến 2656807957
+  + `win 501`: Đây là cửa sổ TCP (window size), cho biết số lượng byte dữ liệu mà máy gửi có thể nhận mà không cần đợi xác nhận thêm
+  + `length 112`: Gói tin có 112 byte dữ liệu
++ `Gói tiếp theo tương tự`: Các gói tin tiếp theo có cú pháp tương tự, chỉ khác về các giá trị thời gian, địa chỉ, cổng, cờ, số sequence, và số acknowledgment. Các cờ TCP có thể xuất hiện gồm:
+  + SYN (S): Được sử dụng để khởi tạo một kết nối TCP
+  + ACK (.): Xác nhận dữ liệu đã nhận
+  + FIN (F): Yêu cầu ngắt kết nối
+  + PUSH (P): Đẩy dữ liệu ngay lập tức
+  + RST (R): Reset kết nối
+  + URG (U): Dữ liệu khẩn cấp
++ Gói tin truy vấn DNS `04:24:56.072359 IP relay-da01.vinahost.vn.35911 > dns.google.domain: 7683+ PTR? 225.88.161.113.in-addr.arpa. (45)`
+  + `relay-da01.vinahost.vn.35911 > dns.google.domain`: Gói tin này từ máy chủ relay-da01.vinahost.vn với cổng 35911 đến máy chủ DNS của Google (8.8.8.8), sử dụng cổng domain (53)
+  + `7683+ PTR? 225.88.161.113.in-addr.arpa.`: Đây là một truy vấn DNS, yêu cầu một bản ghi PTR để tra cứu tên miền ngược từ địa chỉ IP 113.161.88.225
++ Gói tin ARP `04:24:56.965802 ARP, Request who-has traps.schusettlement.com tell 103.9.77.1, length 46`: 
+  + `ARP`: Gói tin này sử dụng giao thức ARP (Address Resolution Protocol)
+  + `Request who-has traps.schusettlement.com tell 103.9.77.1`: Máy chủ 103.9.77.1 đang yêu cầu địa chỉ MAC của traps.schusettlement.com
+  + `ength 46`: Gói tin ARP này có độ dài 46 byte
++ `Các thông tin khác`:
+  + SSH traffic: Giao thức SSH được sử dụng trong nhiều gói tin. Các cờ P. xuất hiện nhiều lần, có nghĩa là các dữ liệu đang được đẩy đi qua một phiên SSH đã được thiết lập
+  + ACK và SACK: Một số gói tin chứa cờ ACK để xác nhận dữ liệu đã nhận, và có một số gói có SACK (Selective Acknowledgment) chỉ định các đoạn dữ liệu cụ thể được nhận
