@@ -425,3 +425,77 @@ Trong đó:
   + `proto kernel`: Điều này cho biết rằng tuyến đường này đã được thêm bởi hệ điều hành (kernel) khi giao diện eth0 được cấu hình với một địa chỉ IP
   + `scope link`: Phạm vi của tuyến đường này là "link-local", nghĩa là nó chỉ hợp lệ cho các máy nằm trên cùng một mạng vật lý hoặc cục bộ, tức là không cần phải đi qua cổng (gateway)
   + `src 103.9.77.103`: Địa chỉ IP nguồn của giao diện eth0. Khi gửi gói tin từ giao diện này, hệ thống sẽ sử dụng địa chỉ IP 103.9.77.103 làm nguồn
+
+
+#### 10. ip -s link
+Công cụ hiển thị các thông tin chi tiết về giao diện mạng (network interface), bao gồm số lượng byte đã truyền và nhận, số lượng gói tin đã bị lỗi (errors), và các thông tin thống kê khác. Đây là một công cụ có sẵn trên hầu hết các hệ điều hành Linux
+
+Cú pháp: `ip link show [tên_card_mạng] `
+
+![alt text](ip_s_link_show_eth0.png)
+
+Trong đó:
++ `2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000`:
+  + `2`: eth0: Số thứ tự của giao diện mạng và tên giao diện (eth0). Trong hệ thống có thể có nhiều giao diện mạng, và mỗi giao diện sẽ được đánh số và đặt tên khác nhau (eth0, eth1, wlan0,...)
+  + `<BROADCAST, MULTICAST, UP, LOWER_UP>`: Các thuộc tính của giao diện mạng:
+    + `BROADCAST`: Giao diện này hỗ trợ truyền broadcast (gửi gói tin tới tất cả thiết bị trong mạng)
+    + ` MULTICAST:` Hỗ trợ truyền multicast (gửi gói tin tới một nhóm thiết bị trong mạng)
+    + `UP`: Giao diện này đang hoạt động
+    + `LOWER_UP`: Có tín hiệu kết nối vật lý (có thể là kết nối cáp Ethernet hoặc mạng không dây đang hoạt động)
+  + `mtu 1500`: Maximum Transmission Unit, kích thước tối đa của một gói tin có thể truyền qua giao diện này (1.500 byte). Đây là giá trị phổ biến cho Ethernet
+  + `qdisc fq_codel`: Loại thuật toán hàng đợi (queueing discipline) được sử dụng cho việc quản lý hàng đợi gói tin. Ở đây là fq_codel (Fair Queuing Controlled Delay), một thuật toán chống tắc nghẽn hàng đợi hiệu quả, giúp giảm độ trễ
+  + `state UP`: Trạng thái của giao diện là "UP", có nghĩa là nó đang hoạt động
+  + `mode DEFAULT`: Chế độ hoạt động của giao diện mạng là mặc định
+  + `group default`: Giao diện này thuộc nhóm "default"
+  + `qlen 1000`: Độ dài hàng đợi gói tin (queue length), tức là số lượng gói tin có thể chờ được xử lý trước khi bị loại bỏ. Ở đây, độ dài hàng đợi là 1.000 gói tin.
++ Thông tin về địa chỉ MAC `link/ether 00:16:3e:e3:97:b5 brd ff:ff:ff:ff:ff:ff`:
+  + `link/ether`: Đây là địa chỉ MAC của giao diện mạng, một định danh vật lý của thiết bị mạng. Địa chỉ MAC này là 00:16:3e:e3:97
+  + `brd ff:ff:ff:ff:ff`:Địa chỉ broadcast, địa chỉ này được dùng để gửi dữ liệu tới tất cả các thiết bị trong mạng LAN. Địa chỉ broadcast của Ethernet luôn là ff:ff:ff:ff:ff:ff
++ `RX (Receive)`: Đây là thông tin về số liệu gói tin nhận được trên giao diện này
+  + `bytes`: Số byte dữ liệu đã nhận qua giao diện này, ở đây là 468,131,263 byte (~468 MB)
+  + `packets`: Tổng số gói tin đã nhận, ở đây là 6,066,012 gói tin
+  + `errors`: Số lượng gói tin bị lỗi khi nhận, ở đây là 0 (không có lỗi nào)
+  + `dropped`: Số gói tin bị loại bỏ (drop) do lỗi bộ đệm hoặc quá tải, ở đây là 0
+  + `missed`: Số gói tin bị bỏ lỡ (missed) trong quá trình nhận do card mạng không xử lý kịp, ở đây là 0
+  + `mcast`: Số gói tin multicast nhận được, ở đây là 4,018 gói
++ `TX (Transmit)`: Đây là thông tin về số liệu gói tin đã được gửi đi qua giao diện này. Thông số tương tự
+  + `carrier`: Các lỗi liên quan đến đường truyền vật lý (carrier), chẳng hạn như lỗi tín hiệu. Số này cũng là 0, nghĩa là không có lỗi carrier.
+  + `collsns`: Số va chạm (collision) trên giao diện. Trên các mạng hiện đại, số lượng này thường là 0, do các mạng dùng switch Ethernet không còn xảy ra va chạm nhiều như trước.
++ `altname enp0s18 và altname ens18`: Đây là các tên khác (alternative names) của giao diện eth0, thường được cấu hình theo kiểu định danh dựa trên vị trí phần cứng hoặc cấu trúc định danh mới của hệ thống Linux, thay thế tên "eth0". Hệ thống có thể sử dụng các tên khác này thay cho eth0
+
+
+#### 11. ethtool
+Công cụ để lấy thông tin chi tiết về trạng thái và các chỉ số (metrics) của card mạng, bao gồm các thống kê liên quan đến Physical Layer (tầng vật lý)
+
+Cú pháp: `ethtool -S [tên_card_mạng]`
+
+![alt text](ethtool.png)
+
+Trong đó:
++ `Thống kê gói tin nhận (RX - Receive)` gồm:
+  + `rx_packets: 6105402`: Tổng số gói tin đã được nhận qua giao diện eth0 là 6,105,402 gói
+  + `rx_bytes: 495359251`: Số lượng byte dữ liệu đã nhận được là 495,359,251 byte (~495 MB)
+  + `rx_broadcast: 5213528`: Số lượng gói tin broadcast đã nhận là 5,213,528. Các gói tin broadcast được gửi tới tất cả các thiết bị trong mạng
+  + `rx_multicast: 4018`: Số lượng gói tin multicast đã nhận là 4,018. Gói tin multicast được gửi tới một nhóm cụ thể trong mạng
+  + `rx_errors: 0`: Số lượng lỗi khi nhận gói tin là 0, nghĩa là không có lỗi nào xảy ra khi nhận gói
+  + `rx_length_errors: 0`: Không có lỗi gói tin do chiều dài không đúng (gói tin bị quá ngắn hoặc quá dài)
+  + `rx_over_errors: 0`: Không có lỗi do bộ đệm của giao diện mạng bị tràn (buffer overrun), tức là card mạng luôn xử lý kịp gói tin mà không bị tràn bộ đệm
+  + `rx_frame_errors: 0`: Không có lỗi khung (frame errors), lỗi này có thể xảy ra khi kích thước gói tin vượt quá giới hạn hoặc không đồng bộ với mạng
+  + `rx_no_buffer_count: 0`: Không có lỗi liên quan đến thiếu bộ đệm khi nhận dữ liệu
+  + `rx_missed_errors: 0`: Không có gói tin nào bị bỏ lỡ do card mạng không xử lý kịp
+  + `rx_long_length_errors 0` : Không có lỗi do gói tin có chiều dài vượt quá mức quy định
+  + `rx_short_length_errors: 0`: Không có lỗi do gói tin có chiều dài nhỏ hơn mức quy định
+  + `rx_align_errors: 0`: Không có lỗi do gói tin không được căn chỉnh đúng với giao thức mạng
+  + `rx_flow_control_xon và rx_flow_control_xoff: 0`: Không có gói tin liên quan đến điều khiển luồng (flow control) được nhận. Điều khiển luồng là kỹ thuật điều chỉnh lưu lượng giữa các thiết bị để tránh tắc nghẽn
+  + `rx_long_byte_count: 495359251`: Tổng số byte dữ liệu đã nhận với gói tin có chiều dài lớn hơn là 495,359,251 byte
+  + `rx_csum_offload_good: 0`: Không có gói tin nào được kiểm tra checksum tốt bởi card mạng (offload kiểm tra checksum)
+  + `rx_csum_offload_errors: 0`: Không có lỗi kiểm tra checksum nào được phát hiện khi card mạng thực hiện offload kiểm tra checksum
++ `Thống kê gói tin gửi (TX - Transmit)` gồm:
+  + `tx_packets: 981335`: Tổng số gói tin đã được gửi qua giao diện eth0 là 981,335 gói
+  + `tx_bytes: 159174404`: Số lượng byte dữ liệu đã gửi qua giao diện là 159,174,404 byte (~159 MB)
+  + `tx_broadcast: 1`: Chỉ có 1 gói tin broadcast đã được gửi đi, điều này cho thấy giao diện chủ yếu gửi dữ liệu điểm-điểm
+  + `tx_multicast: 109`: Tổng số gói tin multicast đã được gửi là 109
+  + `tx_errors: 0`: Không có lỗi nào xảy ra khi gửi gói tin
+  + `tx_dropped: 0`: Không có gói tin nào bị loại bỏ khi gửi
+  + `tx_aborted_errors: 0`: Không có lỗi gói tin bị hủy bỏ khi gửi
+  + `tx_carrier_errors: 0`: Không có lỗi liên quan đến tín hiệu mạng khi gửi gói tin.
