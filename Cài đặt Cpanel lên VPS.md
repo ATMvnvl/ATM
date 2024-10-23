@@ -23,5 +23,6 @@ Sau khi đăng ký xong ta có mở mail đã đăng ký lên xem và copy licen
 
 ![alt text](ssh.png)
 
+Và chạy lệnh sau: `cd /root && curl -o latest -L https://securedownloads.cpanel.net/latest && sh latest`
 
-ATMvn
+![alt text](vina1.png)
