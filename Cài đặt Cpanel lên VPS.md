@@ -10,9 +10,7 @@ Bảng tổng quan về cPanel nguyên bản và CloudLiniux
 | `Ưu và nhược điểm` | `Ưu điểm` <br> - Dễ sử dụng và ổn định <br> - Thiết kế tối ưu người dùng <br> - Cập nhật và bảo mật cao <br> - Hỗ trợ trực tiếp <br> - Quản lý trên điện thoại <br> - API ổn định <br> - Sao lưu dữ liệu hiệu quả <br> `Nhược điểm` <br> - Nhiều tính năng không cần thiết <br> - Dễ vô tình thay đổi các thông số quan trọng <br> - Một số host chạy bản cPanel cũ <br> - Tốn kém hơn <br> - Mất phí theo tháng hoặc năm   | `Ưu điểm` <br> - Tính ổn định và hiệu quả <br> - Khả năng bảo vệ và sự cách ly <br> - Tương thích cao với cPanel <br> - Tăng hiệu quả máy chủ <br> `Nhược điểm` <br> - Chi phí phát sinh thêm <br> - Hạn chế về khả năng tương thích <br> - Khó khăn trong việc học <br> - Giới hạn về phân bổ tài nguyên <br> - Phụ thuộc vào CloudLinux <br> - Vấn đề về PHP Selector <br> | 
 
 
-### Cài đặt CloudLinux trên VPS
-
-#### Bước 1: Cài đặt CloudLinux OS
+#### Bước 1: cPanel & WHM Installer
 Đầu tiên cần SSH vào VPS đang sử dụng: ssh root@103.9.77.103 
 
 ![alt text](ssh.png)
