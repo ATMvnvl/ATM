@@ -11,18 +11,12 @@ Bảng tổng quan về cPanel nguyên bản và CloudLiniux
 
 
 ### Cài đặt CloudLinux trên VPS
-#### Bước 1: Chuẩn bị License CloudLinux 
-Lên trang chính đăng ký: [CloudLinux](https://www.cloudlinux.com/trial) (Chọn CloudLinux OS )
 
-Sau khi đăng ký xong ta có mở mail đã đăng ký lên xem và copy license (`Trial for 30 days`)
-
-![alt text](cloudlinux.png)
-
-#### Bước 2: Cài đặt CloudLinux OS
+#### Bước 1: Cài đặt CloudLinux OS
 Đầu tiên cần SSH vào VPS đang sử dụng: ssh root@103.9.77.103 
 
 ![alt text](ssh.png)
 
-Và chạy lệnh sau: `cd /root && curl -o latest -L https://securedownloads.cpanel.net/latest && sh latest`
+Và chạy lệnh sau: `cd /root && curl -o latest -L https://securedownloads.cpanel.net/latest && sh latest` (Khá lâu)
 
 ![alt text](vina1.png)
